@@ -1,46 +1,34 @@
-// Simple recursive version
-fn fibonacci_recursive(n: u32) -> u64 {
-    match n {
-        0 => 0,
-        1 => 1,
-        _ => fibonacci_recursive(n - 1) + fibonacci_recursive(n - 2),
-    }
-}
-
-// Optimized recursive version using memoization
-use std::collections::HashMap;
-
-fn fibonacci_memoized(n: u32, memo: &mut HashMap<u32, u64>) -> u64 {
-    // Check if we've already calculated this value
-    if let Some(&val) = memo.get(&n) {
-        return val;
-    }
-
-    // Calculate new value and store in memo
-    let val = match n {
-        0 => 0,
-        1 => 1,
-        _ => fibonacci_memoized(n - 1, memo) + fibonacci_memoized(n - 2, memo),
-    };
-
-    memo.insert(n, val);
-    val
-}
-
 fn main() {
-    // Example usage of simple recursive version
-    let n = 10;
-    println!(
-        "Simple recursive: The {}th Fibonacci number is: {}",
-        n,
-        fibonacci_recursive(n)
-    );
+    let my_string = String::from("hello world");
 
-    // Example usage of memoized version
-    let mut memo = HashMap::new();
-    println!(
-        "Memoized recursive: The {}th Fibonacci number is: {}",
-        n,
-        fibonacci_memoized(n, &mut memo)
-    );
+    // `first_word` works on slices of `String`s, whether partial or whole
+    let word = first_word(&my_string[0..6]);
+    let word = first_word(&my_string[..]);
+    // `first_word` also works on references to `String`s, which are equivalent
+    // to whole slices of `String`s
+    let word = first_word(&my_string);
+
+    let my_string_literal = "hello world";
+
+    // `first_word` works on slices of string literals, whether partial or whole
+    let word = first_word(&my_string_literal[0..6]);
+    let word = first_word(&my_string_literal[..]);
+
+    // Because string literals *are* string slices already,
+    // this works too, without the slice syntax!
+    let word = first_word(my_string_literal);
+
+    println!("{}", word);
+}
+
+fn first_word(s: &str) -> &str {
+    let bytes = s.as_bytes();
+
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &s[..i];
+        }
+    }
+
+    &s[..]
 }
