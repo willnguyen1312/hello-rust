@@ -1,12 +1,6 @@
-use std::env;
-use std::io;
+fn main() {
+    let vec = vec![1, 2, 3];
+    let value = vec.get(3).unwrap_or(&0);
 
-fn main() -> io::Result<()> {
-    // Get the current working directory
-    let current_dir = env::current_dir()?;
-
-    // Print the current working directory
-    println!("Current working directory: {}", current_dir.display());
-
-    Ok(())
+    println!("Value: {:?}", value);
 }
