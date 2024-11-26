@@ -1,6 +1,8 @@
 fn main() {
     let vec = vec![1, 2, 3];
-    let value = vec.get(3).unwrap_or(&0);
 
-    println!("Value: {:?}", value);
+    match vec.get(7) {
+        Some(x) => println!("Item 7 is {}", x),
+        None => println!("Sorry, this vector is too short."),
+    }
 }
