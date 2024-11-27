@@ -1,8 +1,14 @@
 fn main() {
-    let vec = vec![1, 2, 3];
-
-    match vec.get(7) {
-        Some(x) => println!("Item 7 is {}", x),
-        None => println!("Sorry, this vector is too short."),
+    struct Person {
+        name: Option<String>,
     }
+    let mut composers = Vec::new();
+    composers.push(Person {
+        name: Some("Palestrina".to_string()),
+    });
+
+    let first_name = composers[0].name.take();
+    println!("{:?}", first_name);
+
+    println!("{:?}", composers[0].name);
 }
