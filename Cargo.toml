@@ -6,6 +6,8 @@ edition = "2021"
 [dependencies]
 ferris-says = "0.3.2"
 rand = "0.8.5"
+sqlx = { version = "0.6", features = ["sqlite", "runtime-tokio-native-tls"] }
+tokio = { version = "1", features = ["full"] }
 
 [dev-dependencies]
 criterion = { version = "0.5", features = ["html_reports"] }
